@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 
-const UserInput = () => {
-  const [userInput, setUserInput] = useState({
-    "current-savings": 10000,
-    "yearly-contribution": 1200,
-    "expected-return": 7,
-    duration: 10,
-  });
+const initialUserInput = {
+  "current-savings": 10000,
+  "yearly-contribution": 1200,
+  "expected-return": 7,
+  duration: 10,
+};
+
+const UserInput = (props) => {
+  const [userInput, setUserInput] = useState(initialUserInput);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("SUBMIT");
+    props.onCalculate(userInput);
   };
 
   const resetHandler = () => {
-    //...
-    console.log("RESET");
+    setUserInput(initialUserInput);
   };
 
   const inputChangeHandler = (input, value) => {
@@ -28,7 +29,7 @@ const UserInput = () => {
 
     //...
   };
-  console.log(userInput);
+
   return (
     <form onSubmit={submitHandler} className='form'>
       <div className='input-group'>
